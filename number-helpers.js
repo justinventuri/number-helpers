@@ -301,9 +301,16 @@ NumberHelpers = {
 
 if (Meteor.isClient) {
   var Helpers = {
-    number_to_currency: function( float, opts ) {
-      return NumberHelpers.number_to_currency(float, opts);
+    number_to_currency: function( number, opts ) {
+      return NumberHelpers.number_to_currency(number, opts.hash);
+    },
+    number_with_precision: function( number, opts ) {
+      if( isNaN( number ) || number === null ) {
+        return "";
+      }
+      return NumberHelpers.number_with_precision( number, opts.hash );
     }
+
   }
   for (var key in Helpers) {
     UI.registerHelper(key, Helpers[key]);
